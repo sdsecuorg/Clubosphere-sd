@@ -27,21 +27,21 @@ body {
 
 
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 220px;
+    height: 100vh;
     background-color: #3BA99C;
-    color: #E0F4F2;
-    padding: 2rem 1.5rem;
+    color: white;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.5rem;
-    height: 100vh;
-    box-sizing: border-box;
-    z-index: 2;
-    position: relative;
+    z-index: 1000;
 }
 
-nav > div {
+nav>div {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -81,6 +81,11 @@ nav a:hover {
     background-color: #155241;
 }
 
+main.mosaique {
+    margin-left: 220px;
+    padding: 1rem;
+}
+
 .mosaique {
     display: flex;
     gap: 15px;
@@ -100,7 +105,7 @@ nav a:hover {
     height: 100%;
 }
 
-.colonne > div {
+.colonne>div {
     flex-grow: 1;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -142,7 +147,7 @@ nav a:hover {
     border: none;
 }
 
-.mosaique > .colonne > div:hover {
+.mosaique>.colonne>div:hover {
     filter: brightness(85%);
     cursor: pointer;
 }
@@ -232,4 +237,126 @@ nav a:hover {
 
 .signup-link a:hover {
     text-decoration: underline;
+}
+
+nav .logout-btn {
+    background-color: #2e998d;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: auto;
+    transition: background-color 0.3s ease;
+}
+
+nav .logout-btn:hover {
+    background-color: #21867b;
+}
+
+.form-section {
+    flex-grow: 1;
+    padding: 3rem 2rem;
+    margin-left: 220px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+}
+
+form.form-wrapper {
+    background-color: #fff;
+    max-width: 600px;
+    width: 100%;
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+form.form-wrapper h1 {
+    font-weight: 800;
+    font-size: 2rem;
+    color: #1D4E47;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+form.form-wrapper label {
+    font-weight: 700;
+    color: #1D4E47;
+    margin-bottom: 0.3rem;
+}
+
+form.form-wrapper input[type="text"],
+form.form-wrapper textarea,
+form.form-wrapper input[type="file"] {
+    padding: 0.7rem 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+form.form-wrapper input[type="text"]:focus,
+form.form-wrapper textarea:focus,
+form.form-wrapper input[type="file"]:focus {
+    border-color: #3BA99C;
+    outline: none;
+    box-shadow: 0 0 6px rgba(59, 169, 156, 0.5);
+}
+
+form.form-wrapper textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.multi-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.add-button {
+    background-color: #3BA99C;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1.2rem;
+}
+
+.add-button:hover {
+    background-color: #2b7a71;
+}
+
+.btn-submit {
+    background-color: #1D4E47;
+    color: #E0F4F2;
+    border: none;
+    padding: 0.9rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #155241;
 }
