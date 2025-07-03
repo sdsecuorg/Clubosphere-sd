@@ -372,9 +372,9 @@ body {
 }
 
 .form-wrapper {
-    width: 90vw; /* largeur relative à la fenêtre */
-    max-width: 900px; /* max large */
-    min-width: 600px; /* largeur minimale */
+    width: 90vw;
+    max-width: 900px;
+    min-width: 600px;
     background: #fff;
     padding: 40px 60px;
     border-radius: 8px;
