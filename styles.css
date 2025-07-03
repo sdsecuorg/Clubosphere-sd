@@ -360,3 +360,64 @@ form.form-wrapper textarea {
 .btn-submit:hover {
     background-color: #155241;
 }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-wrapper {
+    width: 90vw; /* largeur relative à la fenêtre */
+    max-width: 900px; /* max large */
+    min-width: 600px; /* largeur minimale */
+    background: #fff;
+    padding: 40px 60px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    box-sizing: border-box;
+}
+
+input[readonly],
+textarea[readonly] {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    border: 1.8px solid #ccc;
+    background-color: #f4f6f8;
+    box-sizing: border-box;
+}
+
+.button-group {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.submit-btn {
+    flex: 1;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    border-radius: 8px;
+}
+
+.submit-btn.accept {
+    background-color: #27ae60;
+}
+
+.submit-btn.accept:hover {
+    background-color: #219150;
+}
+
+.submit-btn.reject {
+    background-color: #e74c3c;
+}
+
+.submit-btn.reject:hover {
+    background-color: #c0392b;
+}

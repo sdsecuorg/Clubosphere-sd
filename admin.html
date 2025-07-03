@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administration – Clubosphère Saint-Denis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <nav>
+        <div>
+            <h2>Administration</h2>
+            <a href="index.html">Accueil</a>
+            <a href="#">Demande n°1</a>
+            <a href="#">Demande n°2</a>
+            <a href="#">Demande n°3</a>
+        </div>
+        <a href="login.html" class="logout-btn">Se déconnecter</a>
+    </nav>
+
+    <main class="form-section">
+        <div class="form-wrapper">
+            <h1>Demande n°1</h1>
+
+            <form>
+                <label for="porteur">Nom du porteur de projet</label>
+                <input id="porteur" type="text" value="Lucas Durand" readonly title="Nom du porteur de projet" />
+
+                <label for="classe">Classe</label>
+                <input id="classe" type="text" value="1ère STMG" readonly title="Classe du porteur de projet" />
+
+                <label for="nomclub">Nom du club</label>
+                <input id="nomclub" type="text" value="Club Manga & Animation" readonly title="Nom du club proposé" />
+
+                <label for="typeclub">Type de club</label>
+                <input id="typeclub" type="text" value="Culturel" readonly title="Type du club proposé" />
+
+                <label for="desc">Description</label>
+                <textarea id="desc" rows="5" readonly
+                    title="Description du projet de club">Le club vise à rassembler des passionnés de manga et d’animation japonaise. Des projections, discussions, ateliers de dessin, et cosplay sont prévus.</textarea>
+
+                <label for="objectifs">Objectifs</label>
+                <textarea id="objectifs" rows="4" readonly
+                    title="Objectifs du club">Favoriser la créativité, la culture graphique et l’expression orale en groupe.</textarea>
+
+                <label for="participants">Nombre de participants estimé</label>
+                <input id="participants" type="text" value="15" readonly title="Nombre de participants estimé" />
+
+                <label for="materiel">Besoin matériel</label>
+                <textarea id="materiel" rows="3" readonly
+                    title="Matériel nécessaire pour le club">Vidéo projecteur, salle équipée, tableaux pour dessin, enceinte audio.</textarea>
+
+                <div class="button-group">
+                    <button type="button" class="submit-btn accept">Accepter</button>
+                    <button type="button" class="submit-btn reject">Refuser</button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
