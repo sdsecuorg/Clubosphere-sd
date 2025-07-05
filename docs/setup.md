@@ -2,7 +2,7 @@
 
 Il existe deux moyens par lesquels vous pouvez lancer l'application.
 
-## Docker (Recommendé)
+## Docker (Recommandé)
 
 * Installez docker
 * Naviguez dans le dossier docker
