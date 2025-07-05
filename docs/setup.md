@@ -1,12 +1,12 @@
 # Setup (docs en cours)
 
-Il existe deux moyens par lequels vous pouvez lancer l'application.
+Il existe deux moyens par lesquels vous pouvez lancer l'application.
 
-## Docker !Recommendé!
+## Docker (Recommendé)
 
 * Installez docker
 * Naviguez dans le dossier docker
-* Executez docker compose
+* Exécutez docker compose
 ```
 docker compose up
 ```
