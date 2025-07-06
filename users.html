@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Utilisateurs – Clubosphère Saint-Denis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <nav>
+        <div>
+            <h2>Administration</h2>
+            <a href="index.html">Accueil</a>
+            <a href="users.html">Utilisateurs</a>
+            <a href="#">Demande n°1</a>
+            <a href="#">Demande n°2</a>
+            <a href="#">Demande n°3</a>
+        </div>
+        <a href="login.html" class="logout-btn">Se déconnecter</a>
+    </nav>
+
+<main class="form-section">
+        <div class="form-wrapper">
+            <h1>Liste des Utilisateurs</h1>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Date de première connexion</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-user-id="1">
+                        <td>1</td>
+                        <td>admin@clubosphere.fr</td>
+                        <td>2023-01-10</td>
+                        <td><span class="role admin">Admin</span></td>
+                        <td>
+                            <button class="change-role" data-new-role="club">Passer Créateur de club</button>
+                            <button class="change-role" data-new-role="user">Passer Utilisateur</button>
+                        </td>
+                    </tr>
+                    <tr data-user-id="2">
+                        <td>2</td>
+                        <td>jeanne.crea@club.fr</td>
+                        <td>2023-03-15</td>
+                        <td><span class="role club">Créateur de club</span></td>
+                        <td>
+                            <button class="change-role" data-new-role="admin">Passer Admin</button>
+                            <button class="change-role" data-new-role="user">Passer Utilisateur</button>
+                        </td>
+                    </tr>
+                    <tr data-user-id="3">
+                        <td>3</td>
+                        <td>emma.user@eleve.fr</td>
+                        <td>2023-05-21</td>
+                        <td><span class="role user">Utilisateur</span></td>
+                        <td>
+                            <button class="change-role" data-new-role="admin">Passer Admin</button>
+                            <button class="change-role" data-new-role="club">Passer Créateur de club</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
