@@ -176,6 +176,16 @@ main.mosaique {
     font-weight: 600;
 }
 
+.credit-banner a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.credit-banner a:hover {
+    text-decoration: underline;
+}
+
 .login-section {
     flex-grow: 1;
     display: flex;
@@ -378,7 +388,7 @@ body {
     background: #fff;
     padding: 40px 60px;
     border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
 }
 
@@ -420,4 +430,74 @@ textarea[readonly] {
 
 .submit-btn.reject:hover {
     background-color: #c0392b;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Couleurs des rôles */
+.role.admin {
+    color: white;
+    background-color: #d9534f;
+    /* rouge */
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.role.club {
+    color: black;
+    background-color: #f0ad4e;
+    /* jaune/orange */
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.role.user {
+    color: white;
+    background-color: #5cb85c;
+    /* vert */
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+button.change-role {
+    margin-left: 10px;
+    padding: 5px 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button.change-role:hover {
+    background-color: #0056b3;
 }
