@@ -37,3 +37,9 @@ Ensuite, cliquez sur `Create pull request`.
 Vous devez ensuite attendre que votre pull request soit validée par un autre contributeur.
 
 Une fois validée, vous pouvez fusionner vos modifications dans `main`.
+
+## Informations sur la structure du projet
+
+Le projet suit une architecture spécifique afin de **mieux organiser**, **tester** et **entretenir** le code.
+
+**Il est nécessaire de suivre cette architecture** (_même si ce n'est parfois pas cool_) afin d'avoir une base **solide** et **homogène**.

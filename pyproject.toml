@@ -1,0 +1,18 @@
+[project]
+name = "clubosphere-sd"
+version = "0.1.0"
+description = "Appli web qui a pour but d'afficher/ajouter/gérer des clubs."
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+license = {text = "GPL3"}
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask (>=3.1.1,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
