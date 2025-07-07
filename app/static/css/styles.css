@@ -37,14 +37,14 @@ nav {
     padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     z-index: 1000;
 }
 
 nav>div {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 nav h2 {
@@ -75,6 +75,13 @@ nav a:hover {
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.bottom-nav {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .btn-login:hover {

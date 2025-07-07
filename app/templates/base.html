@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page_title | default('Clubosphère') }} – Clubosphère Saint-Denis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}"/>
+    <script>
+        const csrfToken = "{{ csrf_token() }}";
+            $.ajaxSetup({
+                beforeSend(xhr, settings) {
+                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+                    }
+                }
+            });
+    </script>
+
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <nav>
+        <h2>{{ page_title | default('Clubosphère') }}</h2>
+        {% if 1==0 %} <!--Implement user management feature first-->
+        <div>
+            <a href="{{url_for('static_page.index')}}">Accueil</a>
+        </div>
+        <a href="{{url_for('static_page.login')}}" class="logout-btn">Se déconnecter</a>
+        {%endif %}
+        
+        <div class="item-display">
+            <a href="{{url_for('static_page.index')}}">Accueil</a>
+            <a href="{{url_for('static_page.about')}}">À propos</a>
+            <!-- <a href="#">Club n°1</a>
+            <a href="#">Club n°2</a>
+            <a href="#">Club n°3</a>
+            <a href="#">Club n°4</a>
+            <a href="#">Club n°5</a>
+            <a href="#">Club n°6</a>
+            <a href="#">Club n°7</a>
+            <a href="#">Club n°8</a>
+            <a href="#">Club n°9</a> -->
+        </div>
+        <div class="bottom-nav">
+            <button class="btn-login" onclick="window.location.href='{{url_for('static_page.login')}}'">Se connecter</button>
+        </div>
+
+    </nav>
+
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="credit-banner">
+        © 2025 SDsecu — Distribué sous licence <a href="https://www.gnu.org/licenses/gpl-3.0.en.html#license-text" target="_blank">GPLv3</a>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="{{url_for('static',filename='js/script.js')}}"></script>
+
+</html>

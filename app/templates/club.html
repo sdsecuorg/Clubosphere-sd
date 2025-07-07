@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
+{% block title %}Créer un club{% endblock %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Créer un Club – Clubosphère Saint-Denis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body>
-    <div id="particles-js"></div>
-
-    <nav>
-        <div>
-            <h2>Créer un Club</h2>
-            <a href="index.html">Accueil</a>
-        </div>
-        <a href="login.html" class="logout-btn">Se déconnecter</a>
-    </nav>
+{% block content %}
 
     <main class="form-section">
         <form id="create-club-form" class="form-wrapper">
@@ -55,8 +38,4 @@
         </form>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-</body>
-
-</html>
+{% endblock %}

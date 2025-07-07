@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -10,15 +10,21 @@
 </head>
 
 <body>
-    <div id="particles-js"></div>
-
+    <div id="particles-js"></div> -->
+<!-- 
     <nav>
         <div>
             <h2>Connexion</h2>
             <a href="index.html">Accueil</a>
             <a href="#">À propos</a>
         </div>
-    </nav>
+    </nav> -->
+
+{% extends "base.html" %}
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+
 
     <main class="login-section">
         <form class="login-form" action="#" method="post">
@@ -35,16 +41,7 @@
             </div>
 
             <button type="submit" class="btn-login">Se connecter</button>
-            <p class="signup-link">Pas encore inscrit ? <a href="signin.html">Créer un compte</a></p>
+            <p class="signup-link">Pas encore inscrit ? <a href="{{url_for('static_page.signin')}}">Créer un compte</a></p>
         </form>
     </main>
-
-    <div class="credit-banner">
-        © 2025 SDsecu — Distribué sous licence <a href="gpl-3.0.txt" target="_blank">GPLv3</a>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-</body>
-
-</html>
+{% endblock %}

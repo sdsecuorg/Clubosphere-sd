@@ -9,7 +9,12 @@ license = {text = "GPL3"}
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "flask (>=3.1.1,<4.0.0)"
+    "flask (>=3.1.1,<4.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "flask-socketio (>=5.5.1,<6.0.0)",
+    "flask-wtf (>=1.2.2,<2.0.0)",
+    "flask-limiter (>=3.12,<4.0)",
+    "black (>=25.1.0,<26.0.0)",
 ]
 
 
