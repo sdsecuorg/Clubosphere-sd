@@ -7,12 +7,16 @@
     <title>Utilisateurs – Clubosphère Saint-Denis</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles_other.css" />
 </head>
 
 <body>
     <div id="particles-js"></div>
+    <button class="menu-toggle" id="openMenu">☰</button>
 
-    <nav>
+    <nav id="sidebar">
+        <button class="close-btn" id="closeMenu">✖</button>
+
         <div>
             <h2>Administration</h2>
             <a href="index.html">Accueil</a>
@@ -24,7 +28,7 @@
         <a href="login.html" class="logout-btn">Se déconnecter</a>
     </nav>
 
-<main class="form-section">
+    <main class="form-section">
         <div class="form-wrapper">
             <h1>Liste des Utilisateurs</h1>
             <table class="user-table">
