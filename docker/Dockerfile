@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir poetry
 COPY pyproject.toml poetry.lock* ./
 
 RUN poetry install --no-root
-
+RUN poetry run python -c "import pymongo; print(pymongo.__version__)"
 COPY . .
 
 EXPOSE 5000
