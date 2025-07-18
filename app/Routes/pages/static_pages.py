@@ -3,12 +3,13 @@ Required libraries
 """
 
 from flask import render_template, Blueprint
-
+from app import limiter
 
 static_page_blueprint = Blueprint("static_page", __name__)
 
 
 @static_page_blueprint.route("/", methods=["GET"])
+@limiter.limit("5 per second")
 def index() -> "Render":
     """Index page
 
@@ -19,6 +20,7 @@ def index() -> "Render":
 
 
 @static_page_blueprint.route("/login", methods=["GET"])
+@limiter.limit("5 per second")
 def login() -> "Render":
     """
         Login page
@@ -29,6 +31,7 @@ def login() -> "Render":
 
 
 @static_page_blueprint.route("/signin", methods=["GET"])
+@limiter.limit("5 per second")
 def signin() -> "Render":
     """
         signin page
@@ -39,6 +42,7 @@ def signin() -> "Render":
 
 
 @static_page_blueprint.route("/admin", methods=["GET"])
+@limiter.limit("5 per second")
 def admin() -> "Render":
     """
         Admin page
@@ -49,6 +53,7 @@ def admin() -> "Render":
 
 
 @static_page_blueprint.route("/club", methods=["GET"])
+@limiter.limit("5 per second")
 def club() -> "Render":
     """
         Club page
@@ -59,6 +64,7 @@ def club() -> "Render":
 
 
 @static_page_blueprint.route("/about", methods=["GET"])
+@limiter.limit("5 per second")
 def about() -> "Render":
     """
         about page

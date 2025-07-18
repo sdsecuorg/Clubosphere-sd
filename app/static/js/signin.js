@@ -23,6 +23,13 @@ $('#registerBtn').on('click',function(){
                 showToast({'message':msg,'title':'Erreur','type':'error'});
                 setTimeout(function(){window.location = '/signin';},1000);
             }
+        },
+        error(xhr) {
+            if (xhr.status === 429) {
+                showToast({ message: 'Trop de tentatives, réessayez plus tard.', title: 'Limite atteinte', type: 'warning' });
+            } else {
+                showToast({ message: 'Erreur serveur. Réessayez.', title: 'Erreur', type: 'error' });
+            }
         }
     })
 });
