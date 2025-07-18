@@ -2,16 +2,16 @@
 File containing classes that retrieves and finds users
 """
 
-from app.db.mongoConnector import MongoConnector
+from app.db.mongo_connector import MongoConnector
 from bson import ObjectId
 
 
-class RetrieveUsers(MongoConnector()):
+class RetrieveUsers(MongoConnector):
     def __init__(self) -> None:
         """
         Constructor
         """
-        super().__init__(self)
+        super().__init__()
 
     def find_user_using_oid(self, oid: str) -> dict[str, str] | None:
         """

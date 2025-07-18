@@ -2,11 +2,11 @@
 File containing classes that modifies user data
 """
 
-from app.db.mongoConnector import MongoConnector
+from app.db.mongo_connector import MongoConnector
 from bson import ObjectId
 
 
-class ModifyUsers(MongoConnector()):
+class ModifyUsers(MongoConnector):
     """Class that contains functions that update, insert, delete
        data inside the `user` mongo collection.
 
@@ -15,7 +15,7 @@ class ModifyUsers(MongoConnector()):
     """
 
     def __init__(self) -> None:
-        super().__init__(self)
+        super().__init__()
 
     def add_new_user(self, db_document: dict[str, str]) -> bool:
         """This functions adds a new user to the users col

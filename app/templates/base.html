@@ -7,16 +7,26 @@
     <title>{{ page_title | default('Clubosphère') }} – Clubosphère Saint-Denis</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}"/>
-    <script>
-        const csrfToken = "{{ csrf_token() }}";
-            $.ajaxSetup({
-                beforeSend(xhr, settings) {
-                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", csrfToken);
-                    }
-                }
-            });
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    
+    <!-- CDN scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous" nonce="{{ csp_nonce() }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" nonce="{{ csp_nonce() }}" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" nonce="{{ csp_nonce() }}"></script>
+
+    <!-- Local scripts -->
+    <script nonce="{{ csp_nonce() }}">
+    const csrfToken = "{{ csrf_token() }}";
+    $.ajaxSetup({
+        beforeSend(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrfToken);
+            }
+        }
+    });
     </script>
+    <script src="{{url_for('static',filename='js/toasty.js')}}" nonce="{{ csp_nonce() }}"></script>
+    <script src="{{url_for('static',filename='js/particles.js')}}" nonce="{{ csp_nonce() }}"></script>
 
 </head>
 
@@ -54,16 +64,15 @@
 
     {% block content %}
     {% endblock %}
+    
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055;"></div>
 
     <div class="credit-banner">
         © 2025 SDsecu — Distribué sous licence <a href="https://www.gnu.org/licenses/gpl-3.0.en.html#license-text" target="_blank">GPLv3</a>
     </div>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" nonce="{{ csp_nonce() }}" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" nonce="{{ csp_nonce() }}"></script>
-<script src="{{url_for('static',filename='js/script.js')}}" nonce="{{ csp_nonce() }}" ></script>
-<script src="{{url_for('static',filename='js/nav.js')}}" nonce="{{ csp_nonce() }}" ></script>
 
+<script src="{{url_for('static',filename='js/nav.js')}}" nonce="{{ csp_nonce() }}"></script>
 
 </html>

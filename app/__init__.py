@@ -46,17 +46,16 @@ class CustomFormatter(logging.Formatter):
 
 def create_app():
     app = Flask(__name__)
-    _self = "self"
+    _self = "'self'"
     Talisman(
         app,
         content_security_policy={
-            "default-src": _self,
-            "img-src": "*",
-            "script-src": [
-                _self,
-            ],
-            "style-src": "*",
-            "font-src": ["fonts.gstatic.com"],
+            "default-src": [_self, "172.18.0.3:5000"],
+            "img-src": ["*", "data:"],
+            "script-src": [_self, "https://cdn.jsdelivr.net"],
+            "style-src": ["*", "'unsafe-inline'"],
+            "font-src": ["https://fonts.gstatic.com"],
+            "connect-src": "*",
         },
         content_security_policy_nonce_in=["script-src"],
         feature_policy={
@@ -72,20 +71,25 @@ def create_app():
     app.secret_key = secrets.token_hex(32)
 
     @app.errorhandler(404)
-    def page_not_found(e: Exception) -> tuple():
+    def page_not_found(e: Exception) -> tuple:
         """RETURN 404 page error"""
         return render_template("status/404.html", reason=e), 404
 
     @app.errorhandler(500)
-    def internal_server_error(e: Exception) -> tuple():
+    def internal_server_error(e: Exception) -> tuple:
         """Return 500 error page"""
         return render_template("status/500.html", reason=e), 500
 
-    from .Routes.pages.dynamicPages import dynamic_page_blueprint
-    from .Routes.pages.staticPages import static_page_blueprint
+    from .Routes.pages.dynamic_pages import dynamic_page_blueprint
+    from .Routes.pages.static_pages import static_page_blueprint
+    from .Routes.api.admin_api import admin_api_blueprint
+    from .Routes.api.user_api import users_api_blueprint
 
     app.register_blueprint(dynamic_page_blueprint)
     app.register_blueprint(static_page_blueprint)
+
+    app.register_blueprint(admin_api_blueprint)
+    app.register_blueprint(users_api_blueprint)
 
     return app
 

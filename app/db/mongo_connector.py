@@ -2,6 +2,8 @@
 File containing the MongoDb constructor class
 """
 
+import os
+
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
