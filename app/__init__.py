@@ -13,6 +13,7 @@ from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFError
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_talisman import Talisman
 
 csrf = CSRFProtect()
 init(autoreset=True)
@@ -45,6 +46,23 @@ class CustomFormatter(logging.Formatter):
 
 def create_app():
     app = Flask(__name__)
+    _self = "self"
+    Talisman(
+        app,
+        content_security_policy={
+            "default-src": _self,
+            "img-src": "*",
+            "script-src": [
+                _self,
+            ],
+            "style-src": "*",
+            "font-src": ["fonts.gstatic.com"],
+        },
+        content_security_policy_nonce_in=["script-src"],
+        feature_policy={
+            "geolocation": "'none'",
+        },
+    )
     csrf.init_app(app)
     limiter.init_app(app)
 

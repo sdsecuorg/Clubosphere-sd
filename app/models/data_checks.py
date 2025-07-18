@@ -35,6 +35,20 @@ class DataCheck:
         pattern = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$")
         return bool(pattern.match(email))
 
+    def check_password(self, password: str) -> bool:
+        """Check the validity of a password.
+        The password much be longer than 6 chars,
+        include lower/upper case letters, numbers and special chars.
+
+        Args:
+            password (str): password string
+
+        Returns:
+            bool: True if password meets requirements else False
+        """
+        ### TO DO
+        return True
+
     def valid_mongo_id(self, oid: str) -> bool:
         """Function that checks if the oid is valid
 
@@ -45,3 +59,14 @@ class DataCheck:
             bool: True if valid otherwise False.
         """
         return ObjectId.is_valid(oid)
+
+    def sanitize_string(self, string: str) -> str:
+        """Function that sanitizes a string
+        It will limit the string to 1024 chars and strip it
+        Args:
+            string (str): unsafe string
+
+        Returns:
+            str: safe string
+        """
+        return string.strip()[:1024]

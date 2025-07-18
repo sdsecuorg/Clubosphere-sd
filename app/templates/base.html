@@ -46,7 +46,7 @@
             <a href="#">Club n°9</a> -->
         </div>
         <div class="bottom-nav">
-            <button class="btn-login" onclick="window.location.href='{{url_for('static_page.login')}}'">Se connecter</button>
+            <button class="btn-login" id="loginNavBtn">Se connecter</button>
         </div>
 
     </nav>
@@ -60,7 +60,10 @@
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="{{url_for('static',filename='js/script.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" nonce="{{ csp_nonce() }}" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" nonce="{{ csp_nonce() }}"></script>
+<script src="{{url_for('static',filename='js/script.js')}}" nonce="{{ csp_nonce() }}" ></script>
+<script src="{{url_for('static',filename='js/nav.js')}}" nonce="{{ csp_nonce() }}" ></script>
+
 
 </html>

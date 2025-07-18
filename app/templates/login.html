@@ -27,7 +27,7 @@
 
 
     <main class="login-section">
-        <form class="login-form" action="#" method="post">
+        <form class="login-form">
             <h1>Se connecter</h1>
             <label for="username">Identifiant</label>
             <input type="text" id="username" name="username" required />
@@ -40,8 +40,11 @@
                 <label for="remember">Se souvenir de moi</label>
             </div>
 
-            <button type="submit" class="btn-login">Se connecter</button>
+            <button type="submit" class="btn-login" id="connectBtn">Se connecter</button>
             <p class="signup-link">Pas encore inscrit ? <a href="{{url_for('static_page.signin')}}">Créer un compte</a></p>
         </form>
     </main>
+
+    <script src="{{ url_for('static',filename='login.js')}}" nonce="{{ csp_nonce() }}"></script>
+
 {% endblock %}

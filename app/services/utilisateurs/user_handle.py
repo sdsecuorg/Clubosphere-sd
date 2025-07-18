@@ -5,8 +5,11 @@ Uses flask-session thus not ideal for standalone unit testing
 
 from flask import session
 
-from app.models.dataCheck import DataCheck
-from app.repository.users.retrieveUsers import RetrieveUsers
+from app.models.data_checks import DataCheck
+from app.repository.users.retrieve_users import RetrieveUsers
+
+retrieve_users = RetrieveUsers()
+data_check = DataCheck()
 
 
 class UserHandle:
@@ -14,7 +17,6 @@ class UserHandle:
         """
         Constructor init function
         """
-        self.roles = {"visitor": 0, "student": 1, "admin": 2}  # hardcoded for now
 
     def is_logged(self) -> dict[str, str]:
         """Function that checks if a user is logged using flask session.
@@ -27,12 +29,12 @@ class UserHandle:
         if "oid" not in session:
             return {"status": "error", "role_number": self.roles["visitor"]}
         oid = str(session["oid"])
-        valid_id = DataCheck().valid_mongo_id(oid)
+        valid_id = data_check().valid_mongo_id(oid)
 
         if not valid_id:
             return {"status": "error", "role_number": self.roles["visitor"]}
 
-        found_user = RetrieveUsers().find_user_using_oid(oid)
+        found_user = retrieve_users().find_user_using_oid(oid)
 
         if "username" not in found_user:
             return {"status": "error", "role_number": self.roles["visitor"]}
