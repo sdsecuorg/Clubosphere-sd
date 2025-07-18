@@ -5,7 +5,7 @@
 {% block content %}
 
     <main class="login-section">
-        <form class="login-form" action="#" method="post">
+        <div class="login-form">
             <h1>Créer un compte</h1>
 
             <label for="username">Identifiant</label>
@@ -18,10 +18,11 @@
             <input type="password" id="password" name="password" required />
 
             <label for="confirm-password">Confirmer le mot de passe</label>
-            <input type="password" id="confirm-password" name="confirm-password" required />
+            <input type="password" id="passwordVerify" name="confirm-password" required />
 
-            <button type="submit" class="btn-login">S'inscrire</button>
+            <button type="submit" class="btn-login" id="registerBtn">S'inscrire</button>
             <p class="signup-link">Déjà inscrit ? <a href="{{url_for('static_page.login')}}">Se connecter</a></p>
-        </form>
+        </div>
     </main>
+<script src="{{url_for('static',filename='js/signin.js')}}" nonce="{{ csp_nonce() }}"></script>
 {% endblock %}

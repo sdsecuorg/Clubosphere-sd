@@ -2,6 +2,7 @@
 Cryptography file containing crypto classes used by the app.
 """
 
+import secrets
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -9,6 +10,13 @@ class UserCrypt:
 
     def __init__(self):
         self.salt_length = 32
+
+    def gen_token(self):
+        """Function used to generate a token
+        Returns:
+            str: token
+        """
+        return secrets.token_urlsafe(self.salt_length)
 
     def gen_password_hash(self, password: str) -> str:
         """Function used to generate a password hash

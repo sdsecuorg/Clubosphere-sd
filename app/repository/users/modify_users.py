@@ -2,8 +2,10 @@
 File containing classes that modifies user data
 """
 
-from app.db.mongo_connector import MongoConnector
 from bson import ObjectId
+from datetime import datetime, timedelta, timezone
+
+from app.db.mongo_connector import MongoConnector
 
 
 class ModifyUsers(MongoConnector):
@@ -27,4 +29,21 @@ class ModifyUsers(MongoConnector):
         Returns:
             bool: True if inserted successfully, otherwise False
         """
-        return self.users.insert_one(db_document).inserted_id == True
+        return self.users.insert_one(db_document).inserted_id is not None
+
+    def add_new_token(self, token: str, email: str) -> bool:
+        """Function that adds/updates a user's session token
+
+        Args:
+            token (str): generated safe token
+            email (str): used to identify the user
+
+        Returns:
+            bool: True if success. False otherwise
+        """
+        expires_at = datetime.now(timezone.utc) + timedelta(minutes=300)
+        update_doc = {"token": str(token), "expires_at": expires_at}
+        results = self.users.update_one({"email": str(email)}, {"$set": update_doc})
+        if results.modified_count == 0:
+            return False
+        return True

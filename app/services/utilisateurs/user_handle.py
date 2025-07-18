@@ -5,6 +5,7 @@ Uses flask-session thus not ideal for standalone unit testing
 
 import logging
 from flask import session
+from datetime import datetime, timezone
 
 from app.models.data_checks import DataCheck
 from app.repository.users.retrieve_users import RetrieveUsers
@@ -13,8 +14,8 @@ from app.repository.users.modify_users import ModifyUsers
 from app.models.defined_data import DefinedData
 
 
-modify_users = ModifyUsers
-user_crypt = UserCrypt
+modify_users = ModifyUsers()
+user_crypt = UserCrypt()
 retrieve_users = RetrieveUsers()
 data_check = DataCheck()
 defined_data = DefinedData()
@@ -25,6 +26,26 @@ class UserHandle:
         """
         Constructor init function
         """
+
+    def apply_token(self, email: str) -> dict[str, str]:
+        """Function that generates a new token,
+        applies it to the user using their email as identifier,
+        sets the token in the session if success
+        Args:
+            email (str): used to identify the user in the db
+
+        Returns:
+            dict[str,str]: status | err
+        """
+        token = user_crypt.gen_token()
+        status = modify_users.add_new_token(token, email)
+        if not status:
+            return {"status": "error", "msg": "Failed to add token"}
+        role = retrieve_users.find_user_using_token(token)
+        session["token"] = token
+        session["email"] = email
+        session["role"] = role
+        return {"status": "success"}
 
     def login_user(self, email: str, password: str) -> dict[str, str]:
         """Wrapper function that calls the login func from the Login class.
@@ -41,8 +62,31 @@ class UserHandle:
         login_status = Login().login(email, password)
         if login_status["status"] == "error":
             return login_status
-        # maybe add a session specific identifier ?
-        session["email"] = email
+        status_apply_token = self.apply_token(email)
+        if status_apply_token["status"] == "error":
+            return status_apply_token
+
+        return {"status": "success"}
+
+    def register_user(self, username: str, email: str, password: str) -> dict[str, str]:
+        """Wrapper around the register func in Register class
+        This function also sets the user with a session if the register completed successfuly
+        Args:
+            username (str): username
+            email (str): valid email
+            password (str): valid password
+
+        Returns:
+            dict[str,str]: status | err
+        """
+        register_status = Register().register(username, email, password)
+        if register_status["status"] == "error":
+            return register_status
+
+        status_apply_token = self.apply_token(email)
+        if status_apply_token["status"] == "error":
+            return status_apply_token
+
         return {"status": "success"}
 
     def is_logged(self) -> dict[str, str]:
@@ -53,27 +97,33 @@ class UserHandle:
             dict[str,str]: dict containing 'status' (success if logged otherwise error), \
                             role_number (if logged otherwise 0), 'username' if logged 
         """
-        if "oid" not in session:
+        if "token" not in session:
             return {"status": "error", "role_number": self.roles["visitor"]}
-        oid = str(session["oid"])
-        valid_id = data_check.valid_mongo_id(oid)
+        token = str(session["token"])
 
-        if not valid_id:
+        found_user = retrieve_users.find_user_using_token(token)
+
+        if "expires_at" not in found_user:
             return {"status": "error", "role_number": self.roles["visitor"]}
+        expires_at = found_user["expires_at"]
+        now = datetime.now(timezone.utc)
 
-        found_user = retrieve_users.find_user_using_oid(oid)
-
-        if "username" not in found_user:
+        if expires_at < now:
+            self.disconnect()
             return {"status": "error", "role_number": self.roles["visitor"]}
 
         return {
             "status": "success",
             "role_number": found_user["role_number"],
+            "email": found_user["email"],
             "username": found_user["username"],
         }
 
-    def disconnect(self) -> None:
+    def disconnect(self) -> dict[str, str]:
         session.clear()
+        if "token" in session:
+            return {"status": "error", "msg": "Failed to remove the user's session."}
+        return {"status": "success"}
 
 
 class Login:
@@ -89,10 +139,10 @@ class Login:
         Returns:
             dict[str,str]: status | err
         """
-        if data_check.check_email(email):
+        if not data_check.check_email(email):
             return {"status": "error", "msg": "Invalid email."}
 
-        if data_check.check_password(password):
+        if not data_check.check_password(password):
             return {"status": "error", "msg": "Invalid password."}
 
         return {"status": "success"}
@@ -117,9 +167,9 @@ class Login:
         if check_validity["status"] == "error":
             return check_validity
 
-        # find the user using its username
+        # find the user using its email
 
-        found_user = retrieve_users.find_user_using_username(username)
+        found_user = retrieve_users.find_user_using_email(email)
 
         if found_user is None:
             return {"status": "error", "msg": "User not found"}

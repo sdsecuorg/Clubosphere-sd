@@ -1,7 +1,7 @@
 
 $('#connectBtn').on('click',function(){
-    const email = document.getElementById('username').value;
-    const password = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
     
     $.ajax({
         type:'POST',
@@ -9,7 +9,8 @@ $('#connectBtn').on('click',function(){
         data:{email:email,password:password},
         success(response){
             if (response['status'] === 'success'){
-                window.location = '/';
+                showToast({'message':'Vous vous êtes identifié !','title':'Succès','type':'success'});
+                setTimeout(function(){window.location = '/';},1000);
             }else{
                 const msg = (response.msg ? response['msg'] :"Une erreur est survenue.")
                 showToast({'message':msg,'type':'error','title':'Erreur'})

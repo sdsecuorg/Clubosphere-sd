@@ -3,6 +3,8 @@ File containing classes used to verify data
 """
 
 import re
+import unicodedata
+import html
 from bson.objectid import ObjectId
 
 
@@ -32,7 +34,7 @@ class DataCheck:
         Returns:
             bool : True if valid otherwise False.
         """
-        pattern = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$")
+        pattern = re.compile(r"^[a-zA-Z0-9._%+-]+@lycee-saintdenis\.com$")
         return bool(pattern.match(email))
 
     def check_password(self, password: str) -> bool:
@@ -61,12 +63,24 @@ class DataCheck:
         return ObjectId.is_valid(oid)
 
     def sanitize_string(self, string: str) -> str:
-        """Function that sanitizes a string
-        It will limit the string to 1024 chars and strip it
+        """Function that sanitizes a string by
+
+            - Normalizing Unicode
+            - Stripping whitespace
+            - Limiting to 1024 characters
+            - Removing control characters
+            - Escaping HTML
+
         Args:
             string (str): unsafe string
 
         Returns:
             str: safe string
         """
-        return string.strip()[:1024]
+        if not isinstance(string, str):
+            return ""
+        string = unicodedata.normalize("NFKC", string)
+        string = string.strip()[:1024]
+        string = re.sub(r"[^\x20-\x7E\n\t]", "", string)
+        string = html.escape(string)
+        return string

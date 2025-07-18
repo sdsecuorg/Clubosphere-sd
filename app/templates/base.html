@@ -35,16 +35,15 @@
 
     <nav>
         <h2>{{ page_title | default('Clubosphère') }}</h2>
-        {% if 1==0 %} <!--Implement user management feature first-->
-        <div>
-            <a href="{{url_for('static_page.index')}}">Accueil</a>
-        </div>
-        <a href="{{url_for('static_page.login')}}" class="logout-btn">Se déconnecter</a>
-        {%endif %}
         
         <div class="item-display">
             <a href="{{url_for('static_page.index')}}">Accueil</a>
+            <a href="{{url_for('static_page.index')}}">Liste des clubs</a>
             <a href="{{url_for('static_page.about')}}">À propos</a>
+            {% if 'role' in session %}
+                <a href="#">Ajouter un club</a>
+                <a href="#">Profile</a>
+            {%endif %}
             <!-- <a href="#">Club n°1</a>
             <a href="#">Club n°2</a>
             <a href="#">Club n°3</a>
@@ -55,9 +54,15 @@
             <a href="#">Club n°8</a>
             <a href="#">Club n°9</a> -->
         </div>
+        {% if 'role' in session %}
+        <div class="bottom-nav">
+            <button class="btn-login"><a href="/api/logout">Déconnexion</a></button>
+        </div>  
+        {% else %}
         <div class="bottom-nav">
             <button class="btn-login" id="loginNavBtn">Se connecter</button>
         </div>
+        {%endif %}
 
     </nav>
 

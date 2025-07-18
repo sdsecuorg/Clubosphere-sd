@@ -1,0 +1,28 @@
+
+$('#registerBtn').on('click',function(){
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const password_verify = document.getElementById('passwordVerify').value;
+
+    if (password !== password_verify){
+        showToast({'message':'Les mots de passe ne sont pas identique.','title':'Erreur','type':'error'});
+        return;
+    };
+
+    $.ajax({
+        type:'POST',
+        url:'/api/register',
+        data:{username:username,email:email,password:password},
+        success(response){
+            if (response['status'] === 'success'){
+                showToast({'message':'Vous avez créer un compte !','title':'Succès','type':'success'});
+                setTimeout(function(){window.location = '/';},1000);
+            }else{
+                const msg = response.msg? response.msg :"Une erreur est survenu";
+                showToast({'message':msg,'title':'Erreur','type':'error'});
+                setTimeout(function(){window.location = '/signin';},1000);
+            }
+        }
+    })
+});
