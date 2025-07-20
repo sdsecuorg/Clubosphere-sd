@@ -52,17 +52,6 @@ def admin() -> "Render":
     return render_template("/admin/admin.html")
 
 
-@static_page_blueprint.route("/club", methods=["GET"])
-@limiter.limit("5 per second")
-def club() -> "Render":
-    """
-        Club page
-    Returns:
-        Render: club.html
-    """
-    return render_template("club.html")
-
-
 @static_page_blueprint.route("/about", methods=["GET"])
 @limiter.limit("5 per second")
 def about() -> "Render":

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Créer un club{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{url_for('static',filename='css/club.css')}}">
+    <div class="flexwrap">
+        <div class="head">
+            <h1>Vos demandes</h1>
+            <button id="addNewClub" class="btn btn-primary"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <div class="body">
+
+        </div>
+    </div>
+    <!-- <main class="form-section">
+        <form id="create-club-form" class="form-wrapper">
+            <h1>Créer un Club</h1>
+
+            <label for="club-name">Nom du club</label>
+            <input type="text" id="club-name" name="club-name" placeholder="Entrez le nom du club" />
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Décrivez le club"></textarea>
+
+            <label>Membres actifs</label>
+            <div id="members-active-group" class="multi-input-group">
+                <input type="text" name="members-active[]" placeholder="Nom d'un membre actif" />
+            </div>
+            <button type="button" class="add-button" data-group="members-active-group">+ Ajouter un membre</button>
+
+            <label>Professeurs référents</label>
+            <div id="professors-group" class="multi-input-group">
+                <input type="text" name="professors[]" placeholder="Nom d'un professeur référent" />
+            </div>
+            <button type="button" class="add-button" data-group="professors-group">+ Ajouter un professeur</button>
+
+            <label for="objective">Objectif</label>
+            <textarea id="objective" name="objective" placeholder="Objectifs du club"></textarea>
+
+            <label for="target-audience">Pour qui ce club est-il fait ?</label>
+            <input type="text" id="target-audience" name="target-audience" placeholder="Public cible du club" />
+
+            <label for="club-images">Télécharger des images (max 5)</label>
+            <input type="file" id="club-images" name="club-images[]" accept="image/*" multiple max="5" />
+
+            <button type="submit" class="btn-submit">Créer le club</button>
+        </form>
+    </main> -->
+
+{% endblock %}

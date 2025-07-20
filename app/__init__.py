@@ -54,7 +54,7 @@ def create_app():
             "img-src": ["*", "data:"],
             "script-src": [_self, "https://cdn.jsdelivr.net"],
             "style-src": ["*", "'unsafe-inline'"],
-            "font-src": ["https://fonts.gstatic.com"],
+            "font-src": ["https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
             "connect-src": "*",
         },
         content_security_policy_nonce_in=["script-src"],
