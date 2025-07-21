@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% block title %}S'enregistrer{% endblock %}
+
+{% block content %}
+
+    <main class="login-section">
+        <div class="login-form">
+            <h1>Créer un compte</h1>
+
+            <label for="username">Identifiant</label>
+            <input type="text" id="username" name="username" required />
+
+            <label for="email">Adresse e-mail</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required />
+
+            <label for="confirm-password">Confirmer le mot de passe</label>
+            <input type="password" id="passwordVerify" name="confirm-password" required />
+
+            <button type="submit" class="btn-login" id="registerBtn">S'inscrire</button>
+            <p class="signup-link">Déjà inscrit ? <a href="{{url_for('static_page.login')}}">Se connecter</a></p>
+        </div>
+    </main>
+<script src="{{url_for('static',filename='js/signin.js')}}" nonce="{{ csp_nonce() }}"></script>
+{% endblock %}

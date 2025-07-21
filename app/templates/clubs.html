@@ -1,30 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
+{% block title %}Créer un club{% endblock %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Créer un Club – Clubosphère Saint-Denis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="styles_other.css" />
-</head>
+{% block content %}
 
-<body>
-    <div id="particles-js"></div>
-    <button class="menu-toggle" id="openMenu">☰</button>
-
-    <nav id="sidebar">
-        <button class="close-btn" id="closeMenu">✖</button>
-
-        <div>
-            <h2>Créer un Club</h2>
-            <a href="index.html">Accueil</a>
+<link rel="stylesheet" href="{{url_for('static',filename='css/club.css')}}">
+    <div class="flexwrap">
+        <div class="head">
+            <h1>Vos demandes</h1>
+            <button id="addNewClub" class="btn btn-primary"><i class="bi bi-plus-lg"></i></button>
         </div>
-        <a href="login.html" class="logout-btn">Se déconnecter</a>
-    </nav>
+        <div class="body">
 
-    <main class="form-section">
+        </div>
+    </div>
+    <!-- <main class="form-section">
         <form id="create-club-form" class="form-wrapper">
             <h1>Créer un Club</h1>
 
@@ -57,10 +46,6 @@
 
             <button type="submit" class="btn-submit">Créer le club</button>
         </form>
-    </main>
+    </main> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-</body>
-
-</html>
+{% endblock %}

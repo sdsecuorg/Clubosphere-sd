@@ -1,0 +1,22 @@
+
+.flexwrap{
+    margin:0;
+    padding:0;
+    width:70%;
+}
+
+.flexwrap .head{
+    border-bottom: 3px solid rgb(54, 54, 54);
+    display:inline-flex;
+    width:100%;
+    justify-content: space-between;
+}
+
+.flexwrap .head button{
+    height:60px;
+    width:60px;
+    padding:10px;
+    margin:10px;
+
+}
+
