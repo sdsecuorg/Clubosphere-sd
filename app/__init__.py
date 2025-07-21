@@ -14,6 +14,7 @@ from flask_wtf.csrf import CSRFError
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_talisman import Talisman
+from flask_minify import Minify
 
 csrf = CSRFProtect()
 init(autoreset=True)
@@ -62,6 +63,7 @@ def create_app():
             "geolocation": "'none'",
         },
     )
+    Minify(app=app, html=True, js=True, cssless=True)
     csrf.init_app(app)
     limiter.init_app(app)
 

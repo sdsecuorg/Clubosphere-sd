@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Connexion – Clubosphère Saint-Denis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles_other.css" />
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <button class="menu-toggle" id="openMenu">☰</button>
+
+    <nav id="sidebar">
+        <button class="close-btn" id="closeMenu">✖</button>
+
+        <div>
+            <h2>Connexion</h2>
+            <a href="index.html">Accueil</a>
+            <a href="#">À propos</a>
+        </div>
+    </nav>
+
+    <main class="login-section">
+        <form class="login-form" action="#" method="post">
+            <h1>Se connecter</h1>
+            <label for="username">Identifiant</label>
+            <input type="text" id="username" name="username" required />
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required />
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember" />
+                <label for="remember">Se souvenir de moi</label>
+            </div>
+
+            <button type="submit" class="btn-login">Se connecter</button>
+            <p class="signup-link">Pas encore inscrit ? <a href="signin.html">Créer un compte</a></p>
+        </form>
+    </main>
+
+    <div class="credit-banner">
+        © 2025 SDsecu — Distribué sous licence <a href="gpl-3.0.txt" target="_blank">GPLv3</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
