@@ -53,7 +53,7 @@ def create_app():
         content_security_policy={
             "default-src": [_self, "172.18.0.3:5000"],
             "img-src": ["*", "data:"],
-            "script-src": [_self, "https://cdn.jsdelivr.net"],
+            "script-src": _self,
             "style-src": ["*", "'unsafe-inline'"],
             "font-src": ["https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
             "connect-src": "*",
