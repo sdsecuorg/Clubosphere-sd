@@ -12,6 +12,7 @@ user_handle = UserHandle()
 
 
 @users_api_blueprint.route("/api/login", methods=["POST"])
+@user_handle.allowed(visitor_only=True)
 @limiter.limit("1 per second")
 def login() -> dict[str, str]:
     """Login API Route
@@ -28,6 +29,7 @@ def login() -> dict[str, str]:
 
 
 @users_api_blueprint.route("/api/register", methods=["POST"])
+@user_handle.allowed(visitor_only=True)
 @limiter.limit("1 per second")
 def register() -> dict[str, str]:
     """Register API Route
@@ -44,6 +46,7 @@ def register() -> dict[str, str]:
 
 
 @users_api_blueprint.route("/api/logout", methods=["GET"])
+@user_handle.allowed(logged_in=True)
 @limiter.limit("3 per second")
 def logout() -> dict[str, str] or "redirect":
     """Function that logs out the user.

@@ -1,5 +1,4 @@
-
-$('#connectBtn').on('click',function(){
+function submitLogin() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
@@ -23,6 +22,19 @@ $('#connectBtn').on('click',function(){
             } else {
                 showToast({ message: 'Erreur serveur. Réessayez.', title: 'Erreur', type: 'error' });
             }
+             setTimeout(function(){window.location = "/login"}, 500)
         }
     })
+}
+
+
+$('#connectBtn').on('click', function() {
+    submitLogin();
+});
+
+$('#email, #password').on('keydown', function(event) {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+        event.preventDefault();
+        submitLogin();
+    }
 });
