@@ -1,6 +1,5 @@
 
 $('#registerBtn').on('click',function(){
-    const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const password_verify = document.getElementById('passwordVerify').value;
@@ -13,7 +12,7 @@ $('#registerBtn').on('click',function(){
     $.ajax({
         type:'POST',
         url:'/api/register',
-        data:{username:username,email:email,password:password},
+        data:{email:email,password:password},
         success(response){
             if (response['status'] === 'success'){
                 showToast({'message':'Vous avez créer un compte !','title':'Succès','type':'success'});

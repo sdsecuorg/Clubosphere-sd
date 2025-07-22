@@ -31,7 +31,8 @@ class UserCrypt:
         """
         return generate_password_hash(str(password), salt_length=self.salt_length)
 
-    def check_password_against_hash(self, password: str, hashed_password: str) -> bool:
+    @staticmethod
+    def check_password_against_hash(password: str, hashed_password: str) -> bool:
         """Function that checks a plain password against a hashed password.
 
 

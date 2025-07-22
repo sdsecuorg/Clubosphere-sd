@@ -8,7 +8,8 @@ class DefinedData:
     This helps with data consistency
     """
 
-    def roles(self) -> dict[str, int]:
+    @staticmethod
+    def roles() -> dict[str, int]:
         """hardcoded roles for now.
 
         Returns:

@@ -32,17 +32,15 @@ def login() -> dict[str, str]:
 def register() -> dict[str, str]:
     """Register API Route
     Requires :
-        username (str) : valid username
         email (str) : valid user email
         password (str) : user's password
     Returns:
         Render: status | msg
     """
-    username = str(request.form.get("username"))
     email = str(request.form.get("email"))
     password = str(request.form.get("password"))
 
-    return user_handle.register_user(username, email, password)
+    return user_handle.register_user(email, password)
 
 
 @users_api_blueprint.route("/api/logout", methods=["GET"])
