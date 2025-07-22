@@ -62,6 +62,7 @@ def create_app():
         feature_policy={
             "geolocation": "'none'",
         },
+        force_https=False,
     )
     Minify(app=app, html=True, js=True, cssless=True)
     csrf.init_app(app)

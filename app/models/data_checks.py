@@ -13,7 +13,8 @@ class DataCheck:
     Class used to verify data such as username, passwords ,email ..
     """
 
-    def check_username(self, username: str) -> bool:
+    @staticmethod
+    def check_username(username: str) -> bool:
         """Check whether the username is valid.
 
         Args:
@@ -25,7 +26,8 @@ class DataCheck:
         pattern = re.compile(r"^[a-zA-Z0-9_]{3,30}$")
         return bool(pattern.match(username))
 
-    def check_email(self, email: str) -> bool:
+    @staticmethod
+    def check_email(email: str) -> bool:
         """Function used to check the regex of emails
 
         Args:
@@ -37,7 +39,8 @@ class DataCheck:
         pattern = re.compile(r"^[a-zA-Z0-9._%+-]+@lycee-saintdenis\.com$")
         return bool(pattern.match(email))
 
-    def check_password(self, password: str) -> bool:
+    @staticmethod
+    def check_password(password: str) -> bool:
         """Check the validity of a password.
         The password much be longer than 6 chars,
         include lower/upper case letters, numbers and special chars.
@@ -51,7 +54,8 @@ class DataCheck:
         ### TO DO
         return True
 
-    def valid_mongo_id(self, oid: str) -> bool:
+    @staticmethod
+    def valid_mongo_id(oid: str) -> bool:
         """Function that checks if the oid is valid
 
         Args:
@@ -62,7 +66,8 @@ class DataCheck:
         """
         return ObjectId.is_valid(oid)
 
-    def sanitize_string(self, string: str) -> str:
+    @staticmethod
+    def sanitize_string(string: str) -> str:
         """Function that sanitizes a string by
 
             - Normalizing Unicode
@@ -84,3 +89,21 @@ class DataCheck:
         string = re.sub(r"[^\x20-\x7E\n\t]", "", string)
         string = html.escape(string)
         return string
+
+    @staticmethod
+    def retrieve_username_from_email(email: str) -> str | None:
+        """Function that retrieves the username from an email address
+        it retrives the part before the @domain.tld
+
+        Args:
+            email (str): user email
+
+        Returns:
+            str : username string OR None if pattern is not found
+        """
+        pattern = r"^(.*?)@lycee-saintdenis\.com$"
+        match = re.match(pattern, email)
+        if match:
+            return match.group(1)
+        else:
+            return None
