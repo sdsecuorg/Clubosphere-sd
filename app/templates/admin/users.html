@@ -1,32 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
+{% block title %}Administration{% endblock %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Utilisateurs – Clubosphère Saint-Denis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="styles_other.css" />
-</head>
+{% block content %}
 
-<body>
-    <div id="particles-js"></div>
-    <button class="menu-toggle" id="openMenu">☰</button>
-
-    <nav id="sidebar">
-        <button class="close-btn" id="closeMenu">✖</button>
-
-        <div>
-            <h2>Administration</h2>
-            <a href="index.html">Accueil</a>
-            <a href="users.html">Utilisateurs</a>
-            <a href="#">Demande n°1</a>
-            <a href="#">Demande n°2</a>
-            <a href="#">Demande n°3</a>
-        </div>
-        <a href="login.html" class="logout-btn">Se déconnecter</a>
-    </nav>
 
     <main class="form-section">
         <div class="form-wrapper">
@@ -76,9 +52,4 @@
             </table>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-</body>
-
-</html>
+{% endblock %}

@@ -4,11 +4,14 @@ Required libraries
 
 from flask import render_template, Blueprint
 from app import limiter
+from app.services.utilisateurs.user_handle import UserHandle
 
 static_page_blueprint = Blueprint("static_page", __name__)
+user_handle = UserHandle()
 
 
 @static_page_blueprint.route("/", methods=["GET"])
+@user_handle.allowed(logged_in=True, visitor=True)
 @limiter.limit("5 per second")
 def index() -> "Render":
     """Index page
@@ -20,6 +23,7 @@ def index() -> "Render":
 
 
 @static_page_blueprint.route("/login", methods=["GET"])
+@user_handle.allowed(visitor_only=True)
 @limiter.limit("5 per second")
 def login() -> "Render":
     """
@@ -31,6 +35,7 @@ def login() -> "Render":
 
 
 @static_page_blueprint.route("/signin", methods=["GET"])
+@user_handle.allowed(visitor_only=True)
 @limiter.limit("5 per second")
 def signin() -> "Render":
     """
@@ -42,6 +47,7 @@ def signin() -> "Render":
 
 
 @static_page_blueprint.route("/admin", methods=["GET"])
+@user_handle.allowed(logged_in=True, specific_role=2)
 @limiter.limit("5 per second")
 def admin() -> "Render":
     """
@@ -53,6 +59,7 @@ def admin() -> "Render":
 
 
 @static_page_blueprint.route("/about", methods=["GET"])
+@user_handle.allowed(logged_in=True, visitor=True)
 @limiter.limit("5 per second")
 def about() -> "Render":
     """

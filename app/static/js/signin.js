@@ -1,5 +1,4 @@
-
-$('#registerBtn').on('click',function(){
+function submitRegister() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const password_verify = document.getElementById('passwordVerify').value;
@@ -20,7 +19,7 @@ $('#registerBtn').on('click',function(){
             }else{
                 const msg = response.msg? response.msg :"Une erreur est survenu";
                 showToast({'message':msg,'title':'Erreur','type':'error'});
-                setTimeout(function(){window.location = '/signin';},1000);
+                setTimeout(function(){window.location = '/signin';},500);
             }
         },
         error(xhr) {
@@ -29,6 +28,18 @@ $('#registerBtn').on('click',function(){
             } else {
                 showToast({ message: 'Erreur serveur. Réessayez.', title: 'Erreur', type: 'error' });
             }
+            setTimeout(function(){window.location = '/signin';},500);
         }
     })
+}
+
+$('#registerBtn').on('click', function() {
+    submitRegister();
+});
+
+$('#email, #password, #passwordVerify').on('keydown', function(event) {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+        event.preventDefault();
+        submitRegister();
+    }
 });

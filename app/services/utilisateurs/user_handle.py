@@ -4,8 +4,9 @@ Uses flask-session thus not ideal for standalone unit testing
 """
 
 import logging
-from flask import session
-from datetime import datetime, timezone
+from functools import wraps
+from flask import session, redirect
+from datetime import datetime, timezone, timedelta
 
 from app.models.data_checks import DataCheck
 from app.repository.users.retrieve_users import RetrieveUsers
@@ -27,6 +28,61 @@ class UserHandle:
         Constructor init function
         """
 
+    def allowed(
+        self,
+        logged_in: bool = False,
+        visitor: bool = False,
+        visitor_only: bool = False,
+        above_role: int = None,
+        specific_role: int = None,
+    ) -> any:
+        """
+        Function that contains a wrapper and a decorator.
+        It is applied to flask route in order to facilitate user access management.
+
+        Args:
+            logged_in (bool, optional): Allows only logged in users. Defaults to True.
+            visitor (bool, optional): Allows visitors. Defaults to False.
+            visitor_only (bool,optional): Allows only visitors to access. Defaults to False
+            above_role (int, optional): Only allows users with a role above x. Defaults to 1.
+            specific_role (int, optional): Requires users to be the specific role y. Defaults to 1.
+        Returns:
+            any: redirect or status | msg
+        """
+
+        def decorator(func):
+            @wraps(func)
+            def handle(*args, **kwargs):
+                user_info = self.is_logged()
+                is_logged_in = user_info["status"] == "success"
+                role_number = user_info.get(
+                    "role_number", defined_data.roles()["visitor"]
+                )
+                if visitor_only:
+                    if not is_logged_in:
+                        return func(*args, **kwargs)
+                    return redirect("/404")
+
+                if visitor:
+                    return func(*args, **kwargs)
+
+                if logged_in:
+                    if not is_logged_in:
+                        return redirect("/404")
+                    return func(*args, **kwargs)
+
+                if above_role is not None and role_number > above_role:
+                    return func(*args, **kwargs)
+
+                if specific_role is not None and role_number == specific_role:
+                    return func(*args, **kwargs)
+
+                return redirect("/404")
+
+            return handle
+
+        return decorator
+
     def apply_token(self, email: str) -> dict[str, str]:
         """Function that generates a new token,
         applies it to the user using their email as identifier,
@@ -44,7 +100,7 @@ class UserHandle:
         role = retrieve_users.find_user_using_token(token)
         session["token"] = token
         session["email"] = email
-        session["role"] = role
+        session["role_number"] = role["role"]
         return {"status": "success"}
 
     def login_user(self, email: str, password: str) -> dict[str, str]:
@@ -97,25 +153,30 @@ class UserHandle:
                             role_number (if logged otherwise 0), 'username' if logged 
         """
         if "token" not in session:
-            return {"status": "error", "role_number": self.roles["visitor"]}
+            return {"status": "error", "role_number": defined_data.roles()["visitor"]}
         token = str(session["token"])
 
         found_user = retrieve_users.find_user_using_token(token)
 
         if "expires_at" not in found_user:
-            return {"status": "error", "role_number": self.roles["visitor"]}
-        expires_at = found_user["expires_at"]
-        now = datetime.now(timezone.utc)
+            return {"status": "error", "role_number": defined_data.roles()["visitor"]}
+        expires_at = found_user.get("expires_at")
+        if not expires_at:
+            return {"status": "error", "role_number": defined_data.roles()["visitor"]}
 
+        if expires_at.tzinfo is None or expires_at.tzinfo.utcoffset(expires_at) is None:
+            expires_at = expires_at.replace(tzinfo=timezone.utc)
+
+        france_timezone = timezone(timedelta(hours=2))
+        now = datetime.now(france_timezone)
         if expires_at < now:
             self.disconnect()
-            return {"status": "error", "role_number": self.roles["visitor"]}
+            return {"status": "error", "role_number": defined_data.roles()["visitor"]}
 
         return {
             "status": "success",
-            "role_number": found_user["role_number"],
+            "role_number": found_user["role"],
             "email": found_user["email"],
-            "username": found_user["username"],
         }
 
     def disconnect(self) -> dict[str, str]:

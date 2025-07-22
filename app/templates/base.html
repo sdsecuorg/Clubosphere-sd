@@ -46,7 +46,7 @@
         <div class="item-display">
             <a href="{{url_for('static_page.index')}}">Accueil</a>
             <a href="{{url_for('static_page.index')}}">Liste des clubs</a>
-            {% if 'role' in session %}
+            {% if 'role_number' in session %}
                 <a href="{{url_for('dynamic_page.clubs')}}">Ajouter un club</a>
                 <a href="{{url_for('dynamic_page.profile')}}">Profile</a>
             {%endif %}
@@ -62,7 +62,7 @@
             <a href="{{url_for('static_page.about')}}">À propos</a>
         </div>
 
-        {% if 'role' in session %}
+        {% if 'role_number' in session %}
         <div class="bottom-nav">
             <button class="btn-login"><a href="/api/logout">Déconnexion</a></button>
         </div>  
